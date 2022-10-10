@@ -1,0 +1,121 @@
+<!-- looping all products -->
+<div
+  class="container"
+  style="margin-top: 70px"
+>
+  <!-- Checking id which coming from product page click event -->
+  <div class="card" >
+    <div class="card-body">
+      <h3 class="card-title">{{ productsDetail[0].title }}</h3>
+
+      <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-6">
+          <div class="white-box text-center">
+            <img src="{{ productsDetail[0].image }}" class="img-responsive" />
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-6">
+          <h4 class="box-title mt-5">Product description</h4>
+          <h5 class="card-title">Brand: {{ productsDetail[0].brand }}</h5>
+          <p>{{ productsDetail[0].description }}</p>
+          <h2 class="mt-5">
+            ₺{{ productsDetail[0].price }}<small class="text-success">(36%off)</small>
+          </h2>
+          <button class="btn btn-primary btn-rounded" (click)="addtocart(productsDetail[0])">
+            Add to Cart
+          </button>
+
+          <h3 class="box-title mt-5">Key Highlights</h3>
+          <ul class="list-unstyled">
+            <li>
+              <i class="fa fa-check text-success"></i> 100% Burger
+            </li>
+            <li>
+              <i class="fa fa-check text-success"></i> The Pursuit of Perfection
+            </li>
+            <li><i class="fa fa-check text-success"></i> Desing by Cexek</li>
+          </ul>
+          <!-- With help of star array adding 5 star according to data from server -->
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item" *ngFor="let star of star">
+              <i
+                [class]="
+                productsDetail[0].star >= star
+                    ? 'fa fa-star text-success'
+                    : 'fa fa-star-o text-gray'
+                "
+              ></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="be-comment-block">
+    <h1 class="comments-title">
+      Comments ({{ productsDetail[0].comments.length }})
+    </h1>
+    <div
+      class="container"
+      style="margin-top: 70px"
+    >
+      <div >
+        <div class="container" *ngFor="let item of productsDetail[0].comments">
+          <div class="be-comment">
+         
+            <div class="be-comment-content">
+              <span class="be-comment-name">
+                <a href="blog-detail-2.html">{{ item.username }}</a>
+              </span>
+              <span class="be-comment-time">
+                <i class="fa fa-clock-o"></i>
+                {{item.time}}
+              </span>
+
+              <p class="be-comment-text">
+                {{ item.comment }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="be-comment">
+      
+      <!-- commenting section-->
+      <ngx-material-rating 
+      [(ngModel)]="rating" > 
+   </ngx-material-rating>
+      <form class="form-block"  [formGroup]="commentForm" (ngSubmit)="submit()">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <div class="form-group fl_icon">
+              <div class="icon"><i class="fa fa-user"></i></div>
+              <input class="form-input" type="text" formControlName="username" placeholder="Name" />
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 fl_icon">
+            <div class="form-group fl_icon">
+              <div class="icon"><i class="fa fa-envelope-o"></i></div>
+              <input class="form-input" type="text" formControlName="email"  placeholder="Email" />
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="form-group">
+              <textarea
+                class="form-input"
+                formControlName="comment"  
+                placeholder="Comment"
+              ></textarea>
+            </div>
+          </div>
+          <button class="btn btn-primary mx-auto" style="width: 15%" 
+          type="submit" >Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<!-- top section -->
+<main class="page mt-5">
+  <section class="shopping-cart dark">
+    <div class="container">
+      <div class="block-heading">
+        <h2>Orders</h2>
+        <p>Best Products, High Quality, Fair Price.</p>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="items">
+            <!-- looping orders -->
+            <div class="pt-3" style="margin-left: 30px">
+              Order Number:<strong> {{ orders[0].ordernumber }}</strong>
+            </div>
+            <hr />
+            <div class="product" *ngFor="let item of orders[1].order">
+              <div class="row">
+                <div class="col-md-3">
+                  <img
+                    class="img-fluid mx-auto d-block image"
+                    src="{{ item.image }}"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="info">
+                    <div class="row">
+                      <div class="col-md-5 product-name">
+                        <div class="product-name">
+                          {{ item.title }}
+                          <div class="product-info">
+                            <div>
+                              Description:
+                              <span class="value">{{ item.description }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3 quantity">
+                        <span>Quantity:{{ item.quantity }}</span>
+                      </div>
+                      <div class="col-md-3 price">
+                        <span>Price:₺{{ item.total }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
